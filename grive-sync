@@ -1,0 +1,7 @@
+#!/bin/bash
+cd "$HOME/Google Drive"
+while true
+do
+grive
+sleep 60
+done

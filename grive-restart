@@ -1,0 +1,5 @@
+#!/bin/bash
+killall grive-sync
+sleep 5
+/usr/local/grive-indicator/grive-sync &
+exit 0

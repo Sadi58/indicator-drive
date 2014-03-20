@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if ! [[ -d "$HOME/Google Drive" ]]; then
+    mkdir -p "$HOME/Google Drive"
+fi
+
+sudo mkdir -p /usr/local/grive-indicator
+
+sudo cp grive-indicator /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-indicator
+sudo chmod 755 /usr/local/grive-indicator/grive-indicator
+sudo ln -sf /usr/local/grive-indicator/grive-indicator /usr/local/bin/grive-indicator
+
+sudo cp grive-restart /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-restart
+sudo chmod 755 /usr/local/grive-indicator/grive-restart
+
+sudo cp grive-sync /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-sync
+sudo chmod 755 /usr/local/grive-indicator/grive-sync
+
+sudo cp icon4darktheme /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/icon4darktheme
+sudo chmod 755 /usr/local/grive-indicator/icon4darktheme
+
+sudo cp icon4lighttheme /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/icon4lighttheme
+sudo chmod 755 /usr/local/grive-indicator/icon4lighttheme
+
+sudo cp set-interval /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/set-interval
+sudo chmod 755 /usr/local/grive-indicator/set-interval
+
+sudo cp drive.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive.png
+sudo cp drive-dark.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive-dark.png
+sudo cp drive-light.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive-light.png
+sudo chmod a+r /usr/local/grive-indicator/*.png
+
+read -n1 -p "Autostart Grive Indicator? (y/N) "
+echo
+[[ $REPLY = [yY] ]] && cp grive-indicator.desktop $HOME/.config/autostart/ || { rm $HOME/.config/autostart/grive-indicator.desktop; }

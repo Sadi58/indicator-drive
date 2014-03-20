@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+import gtk
+import appindicator
+import os
+import commands
+import gtk
+import sys
+
+class GriveIndicator:
+    def __init__(self):
+	self.ind = appindicator.Indicator("Grive Indicator",
+                                           "indicator-messages",
+                                           appindicator.CATEGORY_APPLICATION_STATUS)
+	self.ind.set_status(appindicator.STATUS_ACTIVE)
+	self.ind.set_attention_icon("indicator-messages-new")
+	self.ind.set_icon_theme_path("/usr/local/grive-indicator/")
+	self.ind.set_icon('drive')
+        self.menu_setup()
+        self.ind.set_menu(self.menu)
+    def menu_setup(self):
+        self.menu = gtk.Menu()
+
+	self.info_item = gtk.MenuItem(self.GriveString())
+	self.info_item.set_sensitive(False)
+	self.info_item.show()
+
+	self.seperator1_item = gtk.SeparatorMenuItem()
+	self.seperator1_item.show()
+
+	self.Remote_item = gtk.MenuItem("Open remote Drive")
+        self.Remote_item.connect("activate", self.openRemote)
+        self.Remote_item.show()
+
+	self.Local_item = gtk.MenuItem("Open local Drive")
+        self.Local_item.connect("activate", self.openLocal)
+        self.Local_item.show()
+
+	self.seperator2_item = gtk.SeparatorMenuItem()
+	self.seperator2_item.show()
+
+	self.Interval_item = gtk.MenuItem("Change sync interval")
+        self.Interval_item.connect("activate", self.setInterval)
+        self.Interval_item.show()
+
+	self.DarkTheme_item = gtk.MenuItem("Use dark theme icon")
+        self.DarkTheme_item.connect("activate", self.setDarkTheme)
+        self.DarkTheme_item.show()
+
+	self.LightTheme_item = gtk.MenuItem("Use light theme icon")
+        self.LightTheme_item.connect("activate", self.setLightTheme)
+        self.LightTheme_item.show()
+
+	self.menu.append(self.info_item)
+	self.menu.append(self.seperator1_item)
+	self.menu.append(self.Remote_item)
+	self.menu.append(self.Local_item)
+	self.menu.append(self.seperator2_item)
+	self.menu.append(self.Interval_item)
+	self.menu.append(self.DarkTheme_item)
+	self.menu.append(self.LightTheme_item)
+
+    def GriveString(self):
+	os.system("/usr/local/grive-indicator/grive-restart")
+	stat, out = commands.getstatusoutput('sleep 5 && ps -U root -u root -N | grep "grive" | sed -e "s/  / /g" | awk -F" " "{print $4}"')
+	out = out.replace("grive-sync", "Grive is running")
+	return out
+
+    def openRemote(self, dude):
+	os.system("xdg-open 'https://drive.google.com/'")
+
+    def openLocal(self, dude):
+	os.system("xdg-open 'Google Drive'")
+
+    def setInterval(self, dude):
+	os.system("/usr/local/grive-indicator/set-interval")
+
+    def setDarkTheme(self, dude):
+	os.system("/usr/local/grive-indicator/icon4darktheme")
+
+    def setLightTheme(self, dude):
+	os.system("/usr/local/grive-indicator/icon4lighttheme")
+
+    def ignore(*args):
+	return gtk.TRUE
+
+    def main(self):
+        gtk.main()
+
+if __name__ == "__main__":
+    indicator = GriveIndicator()
+    indicator.main()
