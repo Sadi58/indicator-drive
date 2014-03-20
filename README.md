@@ -1,7 +1,7 @@
 grive-indicator
 ===============
-
 Indicator applet for Ubuntu to synchronize Google Drive
+Based on the AMD indicator here: https://github.com/beidl/amd-indicator
 
 Prerequisites
 ===============
