@@ -12,9 +12,9 @@ then
     exit 4
 fi
 # Execute sudo action
-CurrentInterval=$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep //g')
+CurrentInterval=$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep 0 //g')
 NewInterval=$(echo -n "$CurrentInterval" | zenity --title "Grive Sync Interval" --text-info --editable)
-sudo -Sp '' sed -i "s/$CurrentInterval/$NewInterval/g" "/usr/local/grive-indicator/grive-sync" <<<"${sudo_password}"
+sudo -Sp '' sed -i "s/sleep 0 $CurrentInterval/sleep 0 $NewInterval/g" "/usr/local/grive-indicator/grive-sync" <<<"${sudo_password}"
 killall python /usr/local/bin/grive-indicator
 killall grive-sync
 /usr/local/bin/grive-indicator
