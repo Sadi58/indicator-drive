@@ -8,7 +8,8 @@ Based on the AMD indicator here: https://github.com/beidl/amd-indicator
 Prerequisites
 ===============
 
-You need "grive", python module "appindicator" and "zenity" installed.
+You need "grive", python module "appindicator" and "zenity" installed, and also to have "grive" authenticated with your Google account by entering this terminal command:
+grive -a
 
 Installation
 ===============
