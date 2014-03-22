@@ -20,27 +20,34 @@ class GriveIndicator:
     def menu_setup(self):
         self.menu = gtk.Menu()
 
-	self.info_item = gtk.MenuItem(self.GriveString())
-	self.info_item.set_sensitive(False)
-	self.info_item.show()
+	self.infoGrive_item = gtk.MenuItem(self.infoGrive())
+	self.infoGrive_item.set_sensitive(False)
+	self.infoGrive_item.show()
 
 	self.seperator1_item = gtk.SeparatorMenuItem()
 	self.seperator1_item.show()
 
-	self.Remote_item = gtk.MenuItem("Open remote Drive")
+	self.Remote_item = gtk.MenuItem("Open remote GDrive")
         self.Remote_item.connect("activate", self.openRemote)
         self.Remote_item.show()
 
-	self.Local_item = gtk.MenuItem("Open local Drive")
+	self.Local_item = gtk.MenuItem("Open local GDrive")
         self.Local_item.connect("activate", self.openLocal)
         self.Local_item.show()
 
 	self.seperator2_item = gtk.SeparatorMenuItem()
 	self.seperator2_item.show()
 
-	self.Interval_item = gtk.MenuItem("Change sync interval")
-        self.Interval_item.connect("activate", self.setInterval)
-        self.Interval_item.show()
+	self.infoInterval_item = gtk.MenuItem("Show sync interval")
+        self.infoInterval_item.connect("activate", self.infoInterval)
+        self.infoInterval_item.show()
+
+	self.SetInterval_item = gtk.MenuItem("Change sync interval")
+        self.SetInterval_item.connect("activate", self.setInterval)
+        self.SetInterval_item.show()
+
+	self.seperator3_item = gtk.SeparatorMenuItem()
+	self.seperator3_item.show()
 
 	self.DarkTheme_item = gtk.MenuItem("Use dark theme icon")
         self.DarkTheme_item.connect("activate", self.setDarkTheme)
@@ -50,16 +57,27 @@ class GriveIndicator:
         self.LightTheme_item.connect("activate", self.setLightTheme)
         self.LightTheme_item.show()
 
-	self.menu.append(self.info_item)
+	self.seperator4_item = gtk.SeparatorMenuItem()
+	self.seperator4_item.show()
+
+	self.Quit_item = gtk.MenuItem("Quit")
+        self.Quit_item.connect("activate", self.Quit)
+        self.Quit_item.show()
+
+	self.menu.append(self.infoGrive_item)
 	self.menu.append(self.seperator1_item)
 	self.menu.append(self.Remote_item)
 	self.menu.append(self.Local_item)
 	self.menu.append(self.seperator2_item)
-	self.menu.append(self.Interval_item)
+	self.menu.append(self.infoInterval_item)
+	self.menu.append(self.SetInterval_item)
+	self.menu.append(self.seperator3_item)
 	self.menu.append(self.DarkTheme_item)
 	self.menu.append(self.LightTheme_item)
+	self.menu.append(self.seperator4_item)
+	self.menu.append(self.Quit_item)
 
-    def GriveString(self):
+    def infoGrive(self):
 	os.system("/usr/local/grive-indicator/grive-restart")
 	stat, out = commands.getstatusoutput('sleep 5 && ps -U root -u root -N | grep "grive" | sed -e "s/  / /g" | awk -F" " "{print $4}"')
 	out = out.replace("grive-sync", "Grive is running")
@@ -71,6 +89,9 @@ class GriveIndicator:
     def openLocal(self, dude):
 	os.system("xdg-open 'Google Drive'")
 
+    def infoInterval(self, dude):
+	os.system("/usr/local/grive-indicator/show-interval")
+
     def setInterval(self, dude):
 	os.system("/usr/local/grive-indicator/set-interval")
 
@@ -79,6 +100,9 @@ class GriveIndicator:
 
     def setLightTheme(self, dude):
 	os.system("/usr/local/grive-indicator/icon4lighttheme")
+
+    def Quit(self, dude):
+	os.system("/usr/local/grive-indicator/quit")
 
     def ignore(*args):
 	return gtk.TRUE

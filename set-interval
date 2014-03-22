@@ -12,9 +12,9 @@ then
     exit 4
 fi
 # Execute sudo action
-CurrentInterval=$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep 0 //g')
-NewInterval=$(echo -n "$CurrentInterval" | zenity --title "Grive Sync Interval" --text-info --editable)
-sudo -Sp '' sed -i "s/sleep 0 $CurrentInterval/sleep 0 $NewInterval/g" "/usr/local/grive-indicator/grive-sync" <<<"${sudo_password}"
+CurrentInterval=$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep 5s //g')
+NewInterval=$(zenity --list --checklist --separator=" " --text="Increase default sync interval (5 seconds) by\nthe total below (hours, minutes, seconds)\n(Cancel = back to 5 seconds default)" --column="Tick" --column="Time" FALSE "1h" FALSE "2h" FALSE "3h" FALSE "4h" FALSE "5h" FALSE "6h" FALSE "1m" FALSE "2m" FALSE "3m" FALSE "5m" FALSE "10m" FALSE "30m" FALSE "5s" FALSE "10s" FALSE "20s" FALSE "30s" FALSE "40s" FALSE "50s" --width=200 --height=530)
+sudo -Sp '' sed -i "s/sleep 5s $CurrentInterval/sleep 5s $NewInterval/g" "/usr/local/grive-indicator/grive-sync" <<<"${sudo_password}"
 killall python /usr/local/bin/grive-indicator
 killall grive-sync
 /usr/local/bin/grive-indicator

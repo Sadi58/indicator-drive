@@ -1,0 +1,4 @@
+#!/bin/bash
+CurrentInterval="$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep 5s //g')"
+zenity --info --text="<i><b>Grive</b> current sync interval is:</i>\n\nDefault minimum <b>5s</b>\n\nplus <big><b>$CurrentInterval</b></big>"
+#notify-send "Grive current sync interval is: $CurrentInterval" -i gtk-dialog-info -t 5 -u normal
