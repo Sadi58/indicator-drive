@@ -1,0 +1,51 @@
+#!/bin/bash
+
+REPO=$(apt-cache search grive | grep "grive - " | awk -F " - " '{print $1}')
+if [ "$REPO" = "grive" ]; then
+	sudo apt-get install grive python-appindicator zenity
+else
+	sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+	sudo apt-get update
+	sudo apt-get install grive python-appindicator zenity
+fi
+
+if ! [[ -d "/usr/local/grive-indicator" ]]; then
+    sudo mkdir -p "/usr/local/grive-indicator"
+fi
+
+sudo cp -f grive-indicator /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-indicator
+sudo chmod 755 /usr/local/grive-indicator/grive-indicator
+sudo ln -sf /usr/local/grive-indicator/grive-indicator /usr/local/bin/grive-indicator
+
+sudo cp -f grive-restart /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-restart
+sudo chmod 755 /usr/local/grive-indicator/grive-restart
+
+sudo cp -f grive-sync /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/grive-sync
+sudo chmod 755 /usr/local/grive-indicator/grive-sync
+
+sudo cp -f icon4darktheme /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/icon4darktheme
+sudo chmod 755 /usr/local/grive-indicator/icon4darktheme
+
+sudo cp -f icon4lighttheme /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/icon4lighttheme
+sudo chmod 755 /usr/local/grive-indicator/icon4lighttheme
+
+sudo cp -f set-interval /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/set-interval
+sudo chmod 755 /usr/local/grive-indicator/set-interval
+
+sudo cp -f drive.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive.png
+sudo cp -f drive-dark.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive-dark.png
+sudo cp -f drive-light.png /usr/local/grive-indicator/
+sudo chown root:root /usr/local/grive-indicator/drive-light.png
+sudo chmod a+r /usr/local/grive-indicator/*.png
+
+sudo cp -f grive-indicator.desktop /etc/xdg/autostart/
+
+echo "Installation completed. Now grive-indicator is ready to start at every login. But make sure that grive is setup and configured before that."
