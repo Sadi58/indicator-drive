@@ -8,13 +8,16 @@ Based on the AMD indicator applet here: https://github.com/beidl/amd-indicator
 Prerequisites
 ===============
 
-1. Install "grive", "python-appindicator" and "zenity" (e.g. using "setup-1-grive-indicator" as below)
-2. Have "grive" authenticated with your chosen Google account by (creating and) changing directory (cd) to "~/Google Drive" and then entering the terminal command "grive -a" in that directory (e.g. using "setup-2-grive" as below) before beginning to use this indicator applet.
+1. Install "grive", "python-appindicator" and "zenity" (e.g. using using DEB package or "setup-1-grive-indicator" as below), AND
+2. Have "grive" authenticated with your chosen Google account by (creating and) changing directory (cd) to "~/Google Drive" and then entering the terminal command "grive -a" in that directory (e.g. using "setup-2-grive" as below)
+before beginning to use this indicator applet.
 
 Installation
 ===============
-1. Open the DEB file with "gdebi-gtk" application, and then make sure that Prerequisite 2 as above is met, if using this indicator for the first time.  
-2. Make first "setup-1-grive-indicator" and then "setup-2-grive" files executable and run in terminal.
+1. Extract and install the DEB file in the arcive with "gdebi-gtk" application, and then make sure that Prerequisite 2 as above is met, if using this indicator for the first time, OR
+2. Make first "setup-1-grive-indicator" and then "setup-2-grive" files executable and run in terminal in that order.
+The "grive-indicator" should now be listed among startup applications and ready to start on next login.
+
 
 Tests
 ===============
