@@ -1,8 +1,13 @@
 #!/bin/bash
 
-sudo add-apt-repository ppa:nilarimogard/webupd8
-sudo apt-get update
-sudo apt-get install grive python-appindicator zenity
+REPO=$(apt-cache search grive | grep "grive - " | awk -F " - " '{print $1}')
+if [ "$REPO" = "grive" ]; then
+	sudo apt-get install grive python-appindicator zenity
+else
+	sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+	sudo apt-get update
+	sudo apt-get install grive python-appindicator zenity
+fi
 
 if ! [[ -d "/usr/local/grive-indicator" ]]; then
     sudo mkdir -p "/usr/local/grive-indicator"
