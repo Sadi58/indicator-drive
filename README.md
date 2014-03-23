@@ -16,6 +16,7 @@ Installation
 ===============
 1. Extract and install the DEB file in the arcive with "gdebi-gtk" application, and then make sure that Prerequisite 2 as above is met, if using this indicator for the first time, OR
 2. Make first "setup-1-grive-indicator" and then "setup-2-grive" files executable and run in terminal in that order.
+
 The "grive-indicator" should now be listed among startup applications and ready to start on next login.
 
 
