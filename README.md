@@ -1,7 +1,7 @@
 grive-indicator
 ===============
 
-A very simple and lightweight Ubuntu indicator applet to synchronize with Google Drive using grive.
+A very simple and lightweight indicator applet to synchronize with Google Drive using grive.
 
 Based on the AMD indicator applet here: https://github.com/beidl/amd-indicator
 
@@ -15,6 +15,10 @@ Installation
 ===============
 1. Open the DEB file with "gdebi-gtk" application, and then make sure that Prerequisite 2 as above is met, if using this indicator for the first time.  
 2. Make first "setup-1-grive-indicator" and then "setup-2-grive" files executable and run in terminal.
+
+Tests
+===============
+Successfully tested under: Ubuntu 13.10 (Unity), Linux Mint 16 (Cinnamon), Siduction 13.2 (Xfce)
 
 ToDo
 ===============
