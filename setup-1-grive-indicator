@@ -11,6 +11,7 @@ fi
 
 sudo rm -Rf "/usr/local/grive-indicator"
 sudo mkdir -p "/usr/local/grive-indicator"
+sudo chmod 777 "/usr/local/grive-indicator"
 
 sudo cp -f grive-indicator /usr/local/grive-indicator/
 sudo chown root:root /usr/local/grive-indicator/grive-indicator
