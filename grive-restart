@@ -2,5 +2,5 @@
 killall grive
 killall grive-sync
 sleep 5
-/usr/local/grive-indicator/grive-sync &
+/usr/local/indicator-grive/grive-sync &
 exit 0

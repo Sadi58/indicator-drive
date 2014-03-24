@@ -1,6 +1,2 @@
 #!/bin/bash
-cp -f /usr/local/grive-indicator/drive-light.png /usr/local/grive-indicator/drive.png
-killall python /usr/local/bin/grive-indicator
-killall grive
-killall grive-sync
-/usr/local/bin/grive-indicator
+cp -f /usr/local/indicator-grive/drive-light.png /usr/local/indicator-grive/drive.png
