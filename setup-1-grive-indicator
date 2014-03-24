@@ -1,5 +1,9 @@
 #!/bin/bash
-	
+
+pkill -f "python /usr/local/bin/grive-indicator"
+killall grive
+killall grive-sync
+
 REPO=$(apt-cache search grive | grep "grive - " | awk -F " - " '{print $1}')
 if [ "$REPO" = "grive" ]; then
 	sudo apt-get install grive python-appindicator zenity
@@ -34,9 +38,21 @@ sudo cp -f icon4lighttheme /usr/local/indicator-grive/
 sudo chown root:root /usr/local/indicator-grive/icon4lighttheme
 sudo chmod a+x /usr/local/indicator-grive/icon4lighttheme
 
+sudo cp -f quit /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/quit
+sudo chmod a+x /usr/local/indicator-grive/quit
+
+sudo cp -f restart /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/restart
+sudo chmod a+x /usr/local/indicator-grive/restart
+
 sudo cp -f set-interval /usr/local/indicator-grive/
 sudo chown root:root /usr/local/indicator-grive/set-interval
 sudo chmod a+x /usr/local/indicator-grive/set-interval
+
+sudo cp -f show-interval /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/show-interval
+sudo chmod a+x /usr/local/indicator-grive/show-interval
 
 sudo cp -f drive.png /usr/local/indicator-grive/
 sudo chown root:root /usr/local/indicator-grive/drive.png
