@@ -1,4 +1,4 @@
 #!/bin/bash
-pkill "python /usr/local/bin/grive-indicator"
+pkill -f "python /usr/local/bin/grive-indicator"
 killall grive
 killall grive-sync
