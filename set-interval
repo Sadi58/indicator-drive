@@ -1,20 +1,8 @@
 #!/bin/bash
-# Get sudo password
-sudo_password="$( gksudo --print-pass --message 'Provide permission to make system changes: Type your password or press Cancel.' -- : 2>/dev/null )"
-# Check for null entry or cancellation.
-if [[ ${?} != 0 || -z ${sudo_password} ]]
-then
-    exit 4
-fi
-# Check that the password is valid.
-if ! sudo -kSp '' [ 1 ] <<<"${sudo_password}" 2>/dev/null
-then
-    exit 4
-fi
-# Execute sudo action
 CurrentInterval=$(cat "/usr/local/grive-indicator/grive-sync" | grep "sleep" | sed -e 's/sleep 5s //g')
 NewInterval=$(zenity --list --checklist --separator=" " --text="Increase default sync interval (5 seconds) by\nthe total below (hours, minutes, seconds)\n(Cancel = back to 5 seconds default)" --column="Tick" --column="Time" FALSE "1h" FALSE "2h" FALSE "3h" FALSE "4h" FALSE "5h" FALSE "6h" FALSE "1m" FALSE "2m" FALSE "3m" FALSE "5m" FALSE "10m" FALSE "30m" FALSE "5s" FALSE "10s" FALSE "20s" FALSE "30s" FALSE "40s" FALSE "50s" --width=200 --height=530)
-sudo -Sp '' sed -i "s/sleep 5s $CurrentInterval/sleep 5s $NewInterval/g" "/usr/local/grive-indicator/grive-sync" <<<"${sudo_password}"
+sudo -Sp '' sed -i "s/sleep 5s $CurrentInterval/sleep 5s $NewInterval/g" "/usr/local/grive-indicator/grive-sync"
 killall python /usr/local/bin/grive-indicator
+killall grive
 killall grive-sync
 /usr/local/bin/grive-indicator

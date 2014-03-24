@@ -1,3 +1,4 @@
 #!/bin/bash
 killall python /usr/local/bin/grive-indicator
+killall grive
 killall grive-sync
