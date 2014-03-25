@@ -24,6 +24,10 @@ class GriveIndicator:
 	self.infoGrive_item.set_sensitive(False)
 	self.infoGrive_item.show()
 
+	self.Restart_item = gtk.MenuItem("Sync Now / Restart")
+        self.Restart_item.connect("activate", self.doRestart)
+        self.Restart_item.show()
+
 	self.seperator1_item = gtk.SeparatorMenuItem()
 	self.seperator1_item.show()
 
@@ -61,6 +65,7 @@ class GriveIndicator:
         self.Quit_item.show()
 
 	self.menu.append(self.infoGrive_item)
+	self.menu.append(self.Restart_item)
 	self.menu.append(self.seperator1_item)
 	self.menu.append(self.Remote_item)
 	self.menu.append(self.Local_item)
@@ -77,6 +82,9 @@ class GriveIndicator:
 	stat, out = commands.getstatusoutput("/usr/local/indicator-grive/status")
 	out = out.replace("grive", "Grive")
 	return out
+
+    def doRestart(self, dude):
+	os.system("/usr/local/indicator-grive/restart")
 
     def openRemote(self, dude):
 	os.system("xdg-open 'https://drive.google.com/'")

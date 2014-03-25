@@ -33,4 +33,5 @@ ToDo
 Changelog
 ===============
 
+0.97: Added "Sync Now / Restart" menu item
 0.96: Fixed and enhanced INFO menu item to show Grive sync interval
