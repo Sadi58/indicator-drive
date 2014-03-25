@@ -1,0 +1,3 @@
+#!/bin/bash
+CurrentInterval="$(cat "/usr/local/indicator-grive/grive-sync" | grep "sleep" | sed -e 's/sleep 5s //g')"
+sleep 5 && ps -U root -u root -N | grep "grive-sync" | sed -e "s/  / /g" | awk -F" " '{print $4}' | sed -e "s/-sync/ is syncing every $CurrentInterval and 5s.../g"

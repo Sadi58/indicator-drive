@@ -3,5 +3,5 @@ cd "$HOME/Google Drive"
 while true
 do
 grive
-sleep 5s 1h 30m 50s
+sleep 5s 5m
 done

@@ -38,13 +38,9 @@ class GriveIndicator:
 	self.seperator2_item = gtk.SeparatorMenuItem()
 	self.seperator2_item.show()
 
-	self.infoInterval_item = gtk.MenuItem("Show sync interval")
-        self.infoInterval_item.connect("activate", self.infoInterval)
-        self.infoInterval_item.show()
-
-	self.SetInterval_item = gtk.MenuItem("Change sync interval")
-        self.SetInterval_item.connect("activate", self.setInterval)
-        self.SetInterval_item.show()
+	self.setInterval_item = gtk.MenuItem("Change sync interval")
+        self.setInterval_item.connect("activate", self.setInterval)
+        self.setInterval_item.show()
 
 	self.seperator3_item = gtk.SeparatorMenuItem()
 	self.seperator3_item.show()
@@ -69,8 +65,7 @@ class GriveIndicator:
 	self.menu.append(self.Remote_item)
 	self.menu.append(self.Local_item)
 	self.menu.append(self.seperator2_item)
-	self.menu.append(self.infoInterval_item)
-	self.menu.append(self.SetInterval_item)
+	self.menu.append(self.setInterval_item)
 	self.menu.append(self.seperator3_item)
 	self.menu.append(self.DarkTheme_item)
 	self.menu.append(self.LightTheme_item)
@@ -79,8 +74,8 @@ class GriveIndicator:
 
     def infoGrive(self):
 	os.system("/usr/local/indicator-grive/grive-restart")
-	stat, out = commands.getstatusoutput('sleep 5 && ps -U root -u root -N | grep "grive" | sed -e "s/  / /g" | awk -F" " "{print $4}"')
-	out = out.replace("grive-sync", "Grive is running")
+	stat, out = commands.getstatusoutput("/usr/local/indicator-grive/status")
+	out = out.replace("grive", "Grive")
 	return out
 
     def openRemote(self, dude):
@@ -88,9 +83,6 @@ class GriveIndicator:
 
     def openLocal(self, dude):
 	os.system("xdg-open 'Google Drive'")
-
-    def infoInterval(self, dude):
-	os.system("/usr/local/indicator-grive/show-interval")
 
     def setInterval(self, dude):
 	os.system("sudo /usr/local/indicator-grive/set-interval && /usr/local/indicator-grive/restart")
