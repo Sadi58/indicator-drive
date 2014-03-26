@@ -28,6 +28,10 @@ class GriveIndicator:
         self.Restart_item.connect("activate", self.doRestart)
         self.Restart_item.show()
 
+	self.setInterval_item = gtk.MenuItem("Change sync interval")
+        self.setInterval_item.connect("activate", self.setInterval)
+        self.setInterval_item.show()
+
 	self.seperator1_item = gtk.SeparatorMenuItem()
 	self.seperator1_item.show()
 
@@ -42,13 +46,6 @@ class GriveIndicator:
 	self.seperator2_item = gtk.SeparatorMenuItem()
 	self.seperator2_item.show()
 
-	self.setInterval_item = gtk.MenuItem("Change sync interval")
-        self.setInterval_item.connect("activate", self.setInterval)
-        self.setInterval_item.show()
-
-	self.seperator3_item = gtk.SeparatorMenuItem()
-	self.seperator3_item.show()
-
 	self.DarkTheme_item = gtk.MenuItem("Use dark theme icon")
         self.DarkTheme_item.connect("activate", self.setDarkTheme)
         self.DarkTheme_item.show()
@@ -57,8 +54,8 @@ class GriveIndicator:
         self.LightTheme_item.connect("activate", self.setLightTheme)
         self.LightTheme_item.show()
 
-	self.seperator4_item = gtk.SeparatorMenuItem()
-	self.seperator4_item.show()
+	self.seperator3_item = gtk.SeparatorMenuItem()
+	self.seperator3_item.show()
 
 	self.Quit_item = gtk.MenuItem("Quit")
         self.Quit_item.connect("activate", self.Quit)
@@ -66,15 +63,14 @@ class GriveIndicator:
 
 	self.menu.append(self.infoGrive_item)
 	self.menu.append(self.Restart_item)
+	self.menu.append(self.setInterval_item)
 	self.menu.append(self.seperator1_item)
 	self.menu.append(self.Remote_item)
 	self.menu.append(self.Local_item)
 	self.menu.append(self.seperator2_item)
-	self.menu.append(self.setInterval_item)
-	self.menu.append(self.seperator3_item)
 	self.menu.append(self.DarkTheme_item)
 	self.menu.append(self.LightTheme_item)
-	self.menu.append(self.seperator4_item)
+	self.menu.append(self.seperator3_item)
 	self.menu.append(self.Quit_item)
 
     def infoGrive(self):
@@ -86,14 +82,14 @@ class GriveIndicator:
     def doRestart(self, dude):
 	os.system("/usr/local/indicator-grive/restart")
 
+    def setInterval(self, dude):
+	os.system("sudo /usr/local/indicator-grive/set-interval && /usr/local/indicator-grive/restart")
+
     def openRemote(self, dude):
 	os.system("xdg-open 'https://drive.google.com/'")
 
     def openLocal(self, dude):
 	os.system("xdg-open 'Google Drive'")
-
-    def setInterval(self, dude):
-	os.system("sudo /usr/local/indicator-grive/set-interval && /usr/local/indicator-grive/restart")
 
     def setDarkTheme(self, dude):
 	os.system("sudo /usr/local/indicator-grive/icon4darktheme && /usr/local/indicator-grive/restart")

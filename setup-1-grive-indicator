@@ -65,7 +65,7 @@ sudo chmod a+r /usr/local/indicator-grive/*.png
 sudo cp -f grive-indicator-sudoers /etc/sudoers.d/
 sudo chmod 644 /etc/sudoers.d/grive-indicator-sudoers
 
-sudo cp -f grive-indicator.desktop /etc/xdg/autostart/
-sudo cp -f grive-indicator.desktop /usr/share/applications/
+sudo cp -f grive_indicator.desktop /etc/xdg/autostart/
+sudo cp -f grive_indicator.desktop /usr/share/applications/
 
 echo "Installation completed. Now grive-indicator is ready to start at every login. But make sure that grive is setup and configured before that."
