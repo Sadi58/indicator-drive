@@ -15,6 +15,8 @@ A very simple and lightweight indicator applet to synchronize with Google Drive 
 
 Based on the AMD indicator applet here: https://github.com/beidl/amd-indicator
 
+![screenshot](grive-indicator-screenshot.png)
+
 Prerequisites
 ===============
 
