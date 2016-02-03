@@ -6,23 +6,23 @@ import commands
 import gtk
 import sys
 
-class GriveIndicator:
+class DriveIndicator:
     def __init__(self):
-	self.ind = appindicator.Indicator("Grive Indicator",
+	self.ind = appindicator.Indicator("Drive Indicator",
                                            "indicator-messages",
                                            appindicator.CATEGORY_APPLICATION_STATUS)
 	self.ind.set_status(appindicator.STATUS_ACTIVE)
 	self.ind.set_attention_icon("indicator-messages-new")
-	self.ind.set_icon_theme_path("/usr/local/indicator-grive/")
+	self.ind.set_icon_theme_path("/usr/local/indicator-drive/")
 	self.ind.set_icon('drive')
         self.menu_setup()
         self.ind.set_menu(self.menu)
     def menu_setup(self):
         self.menu = gtk.Menu()
 
-	self.infoGrive_item = gtk.MenuItem(self.infoGrive())
-	self.infoGrive_item.set_sensitive(False)
-	self.infoGrive_item.show()
+	self.infoDrive_item = gtk.MenuItem(self.infoDrive())
+	self.infoDrive_item.set_sensitive(False)
+	self.infoDrive_item.show()
 
 	self.Restart_item = gtk.MenuItem("Sync Now / Restart")
         self.Restart_item.connect("activate", self.doRestart)
@@ -35,11 +35,11 @@ class GriveIndicator:
 	self.seperator1_item = gtk.SeparatorMenuItem()
 	self.seperator1_item.show()
 
-	self.Remote_item = gtk.MenuItem("Open remote GDrive")
+	self.Remote_item = gtk.MenuItem("Open remote Drive")
         self.Remote_item.connect("activate", self.openRemote)
         self.Remote_item.show()
 
-	self.Local_item = gtk.MenuItem("Open local GDrive")
+	self.Local_item = gtk.MenuItem("Open local Drive")
         self.Local_item.connect("activate", self.openLocal)
         self.Local_item.show()
 
@@ -61,7 +61,7 @@ class GriveIndicator:
         self.Quit_item.connect("activate", self.Quit)
         self.Quit_item.show()
 
-	self.menu.append(self.infoGrive_item)
+	self.menu.append(self.infoDrive_item)
 	self.menu.append(self.Restart_item)
 	self.menu.append(self.setInterval_item)
 	self.menu.append(self.seperator1_item)
@@ -73,32 +73,32 @@ class GriveIndicator:
 	self.menu.append(self.seperator3_item)
 	self.menu.append(self.Quit_item)
 
-    def infoGrive(self):
-	os.system("/usr/local/indicator-grive/grive-restart")
-	stat, out = commands.getstatusoutput("/usr/local/indicator-grive/status")
-	out = out.replace("grive", "Grive")
+    def infoDrive(self):
+	os.system("/usr/local/indicator-drive/indicator-drive.sh drive-restart")
+	stat, out = commands.getstatusoutput("/usr/local/indicator-drive/indicator-drive.sh status")
+	out = out.replace("drive", "Drive")
 	return out
 
     def doRestart(self, dude):
-	os.system("/usr/local/indicator-grive/restart")
+	os.system("/usr/local/indicator-drive/indicator-drive.sh indicator-restart")
 
     def setInterval(self, dude):
-	os.system("sudo /usr/local/indicator-grive/set-interval && /usr/local/indicator-grive/restart")
+	os.system("sudo /usr/local/indicator-drive/indicator-drive.sh set-interval && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
 
     def openRemote(self, dude):
 	os.system("xdg-open 'https://drive.google.com/'")
 
     def openLocal(self, dude):
-	os.system("xdg-open 'Google Drive'")
+	os.system("xdg-open 'Drive'")
 
     def setDarkTheme(self, dude):
-	os.system("sudo /usr/local/indicator-grive/icon4darktheme && /usr/local/indicator-grive/restart")
+	os.system("/usr/local/indicator-drive/indicator-drive.sh icon4darktheme && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
 
     def setLightTheme(self, dude):
-	os.system("sudo /usr/local/indicator-grive/icon4lighttheme && /usr/local/indicator-grive/restart")
+	os.system("/usr/local/indicator-drive/indicator-drive.sh icon4lighttheme && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
 
     def Quit(self, dude):
-	os.system("/usr/local/indicator-grive/quit")
+	os.system("/usr/local/indicator-drive/indicator-drive.sh quit")
 
     def ignore(*args):
 	return gtk.TRUE
@@ -107,5 +107,5 @@ class GriveIndicator:
         gtk.main()
 
 if __name__ == "__main__":
-    indicator = GriveIndicator()
+    indicator = DriveIndicator()
     indicator.main()
