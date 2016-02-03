@@ -1,0 +1,42 @@
+#!/bin/bash
+
+pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
+pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive"
+pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-sync"
+
+DEPENDENCY1=$(apt-cache search python-appindicator | grep "python-appindicator - " | awk -F " - " '{print $1}')
+if [ "$DEPENDENCY1" = "python-appindicator" ]
+then
+	sudo apt-get install python-appindicator -y
+fi
+DEPENDENCY2=$(which zenity | grep -c "bin/zenity")
+if [ "$DEPENDENCY2" = "0" ]
+then
+	sudo apt-get install zenity -y
+fi
+
+sudo rm -Rf "/usr/local/indicator-drive"
+sudo mkdir -p "/usr/local/indicator-drive"
+	
+sudo cp -f indicator-drive.py /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/indicator-drive.py
+sudo chmod 755 /usr/local/indicator-grive/indicator-drive.py
+
+sudo cp -f indicator-drive.sh /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/indicator-drive.sh
+sudo chmod 755 /usr/local/indicator-grive/indicator-drive.sh
+
+sudo cp -f drive.png /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive.png
+sudo chmod a+rw /usr/local/indicator-grive/drive.png
+sudo cp -f drive-dark.png /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive-dark.png
+sudo chmod a+r /usr/local/indicator-grive/drive-dark.png
+sudo cp -f drive-light.png /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive-light.png
+sudo chmod a+r /usr/local/indicator-grive/drive-light.png
+
+sudo cp -f indicator-drive.desktop /etc/xdg/autostart/
+sudo cp -f indicator_drive.desktop /usr/share/applications/
+
+echo "Installation completed. Now indicator-drive is ready to start at every login. But make sure that drive is setup and configured before that."
