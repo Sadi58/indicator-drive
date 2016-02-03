@@ -24,7 +24,7 @@ class DriveIndicator:
 	self.infoDrive_item.set_sensitive(False)
 	self.infoDrive_item.show()
 
-	self.Restart_item = gtk.MenuItem("Sync Now / Restart")
+	self.Restart_item = gtk.MenuItem("Sync now / restart")
         self.Restart_item.connect("activate", self.doRestart)
         self.Restart_item.show()
 
@@ -92,10 +92,10 @@ class DriveIndicator:
 	os.system("xdg-open 'Drive'")
 
     def setDarkTheme(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh icon4darktheme && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
+	os.system("cp -f '/usr/local/indicator-drive/drive-dark.png' '/usr/local/indicator-drive/drive.png' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
 
     def setLightTheme(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh icon4lighttheme && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
+	os.system("cp -f '/usr/local/indicator-drive/drive-light.png' '/usr/local/indicator-drive/drive.png' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
 
     def Quit(self, dude):
 	os.system("/usr/local/indicator-drive/indicator-drive.sh quit")
