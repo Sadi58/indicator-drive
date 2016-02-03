@@ -1,8 +1,8 @@
 #!/bin/bash
 
-pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
-pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive"
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-sync"
+pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-restart"
+pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
 
 DEPENDENCY1=$(apt-cache search python-appindicator | grep "python-appindicator - " | awk -F " - " '{print $1}')
 if [ "$DEPENDENCY1" = "python-appindicator" ]
