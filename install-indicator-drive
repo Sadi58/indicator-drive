@@ -7,12 +7,12 @@ pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-sync"
 DEPENDENCY1=$(apt-cache search python-appindicator | grep "python-appindicator - " | awk -F " - " '{print $1}')
 if [ "$DEPENDENCY1" = "python-appindicator" ]
 then
-	sudo apt-get install python-appindicator -y
+	sudo apt-get install python-appindicator
 fi
 DEPENDENCY2=$(which zenity | grep -c "bin/zenity")
 if [ "$DEPENDENCY2" = "0" ]
 then
-	sudo apt-get install zenity -y
+	sudo apt-get install zenity
 fi
 
 sudo rm -Rf "/usr/local/indicator-drive"
