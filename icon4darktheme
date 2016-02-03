@@ -1,4 +1,0 @@
-#!/bin/bash
-notify-send "Now grive-indicator will restart with new icon" -i gtk-dialog-info -t 3000 -u normal &
-cp -f /usr/local/indicator-grive/drive-dark.png /usr/local/indicator-grive/drive.png
-
