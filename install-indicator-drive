@@ -26,15 +26,18 @@ sudo cp -f indicator-drive.sh /usr/local/indicator-grive/
 sudo chown root:root /usr/local/indicator-grive/indicator-drive.sh
 sudo chmod 755 /usr/local/indicator-grive/indicator-drive.sh
 
-sudo cp -f drive.png /usr/local/indicator-grive/
-sudo chown root:root /usr/local/indicator-grive/drive.png
-sudo chmod a+rw /usr/local/indicator-grive/drive.png
-sudo cp -f drive-dark.png /usr/local/indicator-grive/
-sudo chown root:root /usr/local/indicator-grive/drive-dark.png
-sudo chmod a+r /usr/local/indicator-grive/drive-dark.png
-sudo cp -f drive-light.png /usr/local/indicator-grive/
-sudo chown root:root /usr/local/indicator-grive/drive-light.png
-sudo chmod a+r /usr/local/indicator-grive/drive-light.png
+sudo cp -f drive.svg /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive.svg
+sudo chmod a+rw /usr/local/indicator-grive/drive.svg
+sudo cp -f drive-color.svg /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive-color.svg
+sudo chmod a+r /usr/local/indicator-grive/drive-color.svg
+sudo cp -f drive-dark.svg /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive-dark.svg
+sudo chmod a+r /usr/local/indicator-grive/drive-dark.svg
+sudo cp -f drive-light.svg /usr/local/indicator-grive/
+sudo chown root:root /usr/local/indicator-grive/drive-light.svg
+sudo chmod a+r /usr/local/indicator-grive/drive-light.svg
 
 sudo cp -f indicator-drive.desktop /etc/xdg/autostart/
 sudo cp -f indicator_drive.desktop /usr/share/applications/

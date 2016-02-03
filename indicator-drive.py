@@ -92,10 +92,10 @@ class DriveIndicator:
 	os.system("xdg-open 'Drive'")
 
     def setDarkTheme(self, dude):
-	os.system("cp -f '/usr/local/indicator-drive/drive-dark.png' '/usr/local/indicator-drive/drive.png' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
+	os.system("cp -f '/usr/local/indicator-drive/drive-light.svg' '/usr/local/indicator-drive/drive.svg' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
 
     def setLightTheme(self, dude):
-	os.system("cp -f '/usr/local/indicator-drive/drive-light.png' '/usr/local/indicator-drive/drive.png' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
+	os.system("cp -f '/usr/local/indicator-drive/drive-dark.svg' '/usr/local/indicator-drive/drive.svg' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
 
     def Quit(self, dude):
 	os.system("/usr/local/indicator-drive/indicator-drive.sh quit")

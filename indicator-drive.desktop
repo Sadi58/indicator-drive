@@ -12,4 +12,4 @@ OnlyShowIn=Unity;GNOME;
 Terminal=false
 StartupNotify=true
 X-GNOME-Autostart-enabled=true
-X-GNOME-Autostart-Delay=5
+X-GNOME-Autostart-Delay=3

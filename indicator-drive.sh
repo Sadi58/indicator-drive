@@ -21,7 +21,7 @@ exit 0
 status()
 {
 CurrentInterval="$(grep "sleep" "/usr/local/indicator-drive/indicator-drive.sh" | sed -e 's/sleep //g')"
-sleep 5 && ps -U root -u root -N | grep "drive-sync" | sed -e "s/  / /g" | awk -F" " '{print $4}' | sed -e "s/-sync/ is syncing every $CurrentInterval/g"
+ps -U root -u root -N | grep "drive-sync" | sed -e "s/  / /g" | awk -F" " '{print $4}' | sed -e "s/-sync/ is syncing every $CurrentInterval/g"
 }
 
 set-interval()
