@@ -1,6 +1,0 @@
-#!/bin/bash
-notify-send "grive-indicator is restarting..." -i gtk-dialog-info -t 3000 -u normal &
-pkill -f "python /usr/local/bin/grive-indicator"
-killall grive
-killall grive-sync
-/usr/local/bin/grive-indicator
