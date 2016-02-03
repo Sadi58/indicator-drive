@@ -2,8 +2,8 @@
 Version=1.0
 Encoding=UTF-8
 Type=Application
-Name=Grive Indicator
-Exec=/usr/local/bin/grive-indicator
+Name=Drive Indicator
+Exec=/usr/local/indicator-drive/indicator-drive.py
 Comment=Simple indicator applet to synchronize Google Drive contents
 Icon=google-drive
 Hidden=false
@@ -12,4 +12,4 @@ OnlyShowIn=Unity;GNOME;
 Terminal=false
 StartupNotify=true
 X-GNOME-Autostart-enabled=true
-X-GNOME-Autostart-Delay=10
+X-GNOME-Autostart-Delay=5
