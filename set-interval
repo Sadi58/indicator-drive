@@ -1,8 +1,0 @@
-#!/bin/bash
-OLD=$(cat "/usr/local/indicator-grive/grive-sync" | grep "sleep" | sed -e 's/sleep //g' | sed -e 's/m//g')
-zenity --scale --title="Grive sync interval" --text="                    Current interval is<b> $OLD </b>minute(s).\n                    Set new interval using the scale." --min-value=1 --max-value=180 --value=1 --step=1 > "/tmp/grive-sync-interval"
-NEW=$(cat /tmp/grive-sync-interval)
-	if [ "$NEW" != "" ]; then
-	sed -i "s/$OLD/$NEW/g" "/usr/local/indicator-grive/grive-sync"
-	fi
-exit 0
