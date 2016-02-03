@@ -1,0 +1,9 @@
+#!/bin/bash
+if ! [[ -d "$HOME/Drive" ]]
+then
+    mkdir -p "$HOME/Drive"
+fi
+if ! [[ -d "$HOME/Drive/.gd" ]]
+then
+    drive init "$HOME/Drive"
+fi

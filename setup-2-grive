@@ -1,9 +1,0 @@
-#!/bin/bash
-if ! [[ -d "$HOME/Google Drive" ]]; then
-    mkdir -p "$HOME/Google Drive"
-fi
-cd "$HOME/Google Drive"
-if ! [[ -d "$HOME/Google Drive/.grive" ]]; then
-    grive -a
-fi
-true
