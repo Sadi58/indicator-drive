@@ -1,6 +1,6 @@
 #!/bin/bash
 
-drive_sync()
+drive-sync()
 {
 cd "$HOME/Drive"
 while true
@@ -11,12 +11,10 @@ sleep 5m
 done
 }
 
-indicator_restart()
+drive-restart()
 {
-killall "drive"
 killall "/usr/local/indicator-grive/indicator-grive.sh drive-sync"
-sleep 5
-/usr/local/indicator-grive/indicator-grive.sh grive-sync &
+"/usr/local/indicator-grive/indicator-grive.sh drive-sync" &
 exit 0
 }
 
@@ -37,22 +35,10 @@ then
 fi
 }
 
-icon4darktheme()
+indicator-restart()
 {
-cp -f "/usr/local/indicator-drive/drive-dark.png" "/usr/local/indicator-drive/drive.png"
-}
-
-icon4lighttheme()
-{
-cp -f "/usr/local/indicator-drive/drive-light.png" "/usr/local/indicator-drive/drive.png"
-}
-
-restart()
-{
-notify-send "Drive indicator is restarting..." -i gtk-dialog-info -t 3000 -u normal &
-pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
-killall "drive"
 killall "/usr/local/indicator-drive/indicator-drive.sh drive-sync"
+pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
 "/usr/local/indicator-drive/indicator-drive.py"
 }
 
