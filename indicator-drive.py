@@ -24,78 +24,81 @@ class DriveIndicator:
 	self.infoDrive_item.set_sensitive(False)
 	self.infoDrive_item.show()
 
-	self.Restart_item = gtk.MenuItem("Sync now / restart")
-        self.Restart_item.connect("activate", self.doRestart)
-        self.Restart_item.show()
+	self.separator1_item = gtk.SeparatorMenuItem()
+	self.separator1_item.show()
 
-	self.setInterval_item = gtk.MenuItem("Change sync interval")
-        self.setInterval_item.connect("activate", self.setInterval)
-        self.setInterval_item.show()
-
-	self.seperator1_item = gtk.SeparatorMenuItem()
-	self.seperator1_item.show()
-
-	self.Remote_item = gtk.MenuItem("Open remote Drive")
-        self.Remote_item.connect("activate", self.openRemote)
-        self.Remote_item.show()
-
-	self.Local_item = gtk.MenuItem("Open local Drive")
+	self.Local_item = gtk.MenuItem("Open Drive folder")
         self.Local_item.connect("activate", self.openLocal)
         self.Local_item.show()
 
-	self.seperator2_item = gtk.SeparatorMenuItem()
-	self.seperator2_item.show()
+	self.Remote_item = gtk.MenuItem("Launch Drive website")
+        self.Remote_item.connect("activate", self.openRemote)
+        self.Remote_item.show()
 
-	self.DarkTheme_item = gtk.MenuItem("Use dark theme icon")
-        self.DarkTheme_item.connect("activate", self.setDarkTheme)
-        self.DarkTheme_item.show()
+	self.View_item = gtk.MenuItem("Recently changed files")
+        self.View_item.connect("activate", self.doView)
+        self.View_item.show()
 
-	self.LightTheme_item = gtk.MenuItem("Use light theme icon")
-        self.LightTheme_item.connect("activate", self.setLightTheme)
-        self.LightTheme_item.show()
+	self.separator2_item = gtk.SeparatorMenuItem()
+	self.separator2_item.show()
 
-	self.seperator3_item = gtk.SeparatorMenuItem()
-	self.seperator3_item.show()
+	self.Info_item = gtk.MenuItem("Account Info")
+        self.Info_item.connect("activate", self.Info)
+        self.Info_item.show()
 
-	self.Quit_item = gtk.MenuItem("Quit")
+	self.separator3_item = gtk.SeparatorMenuItem()
+	self.separator3_item.show()
+
+	self.setInterval_item = gtk.MenuItem("Change sync interval...")
+        self.setInterval_item.connect("activate", self.setInterval)
+        self.setInterval_item.show()
+
+	self.Icon_item = gtk.MenuItem("Change indicator icon...")
+        self.Icon_item.connect("activate", self.setIcon)
+        self.Icon_item.show()
+
+	self.separator4_item = gtk.SeparatorMenuItem()
+	self.separator4_item.show()
+
+	self.Quit_item = gtk.MenuItem("Quit Drive")
         self.Quit_item.connect("activate", self.Quit)
         self.Quit_item.show()
 
 	self.menu.append(self.infoDrive_item)
-	self.menu.append(self.Restart_item)
-	self.menu.append(self.setInterval_item)
-	self.menu.append(self.seperator1_item)
-	self.menu.append(self.Remote_item)
+	self.menu.append(self.separator1_item)
 	self.menu.append(self.Local_item)
-	self.menu.append(self.seperator2_item)
-	self.menu.append(self.DarkTheme_item)
-	self.menu.append(self.LightTheme_item)
-	self.menu.append(self.seperator3_item)
+	self.menu.append(self.Remote_item)
+	self.menu.append(self.View_item)
+	self.menu.append(self.separator2_item)
+	self.menu.append(self.Info_item)
+	self.menu.append(self.separator3_item)
+	self.menu.append(self.setInterval_item)
+	self.menu.append(self.Icon_item)
+	self.menu.append(self.separator4_item)
 	self.menu.append(self.Quit_item)
 
     def infoDrive(self):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh drive-restart")
-	stat, out = commands.getstatusoutput("/usr/local/indicator-drive/indicator-drive.sh status")
-	out = out.replace("drive", "Drive")
+	os.system("while ! ping -c 1 -W 1 8.8.8.8; do sleep 1; done && /usr/local/indicator-drive/indicator-drive.sh drive_pull && sleep 1m && /usr/local/indicator-drive/indicator-drive.sh drive_monitor &")
+	stat, out = commands.getstatusoutput("/usr/local/indicator-drive/indicator-drive.sh sync_status")
 	return out
 
-    def doRestart(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh indicator-restart")
-
-    def setInterval(self, dude):
-	os.system("sudo /usr/local/indicator-drive/indicator-drive.sh set-interval && /usr/local/indicator-drive/indicator-drive.sh indicator-restart")
+    def openLocal(self, dude):
+	os.system("xdg-open 'Drive' &")
 
     def openRemote(self, dude):
-	os.system("xdg-open 'https://drive.google.com/'")
+	os.system("xdg-open 'https://drive.google.com/' &")
 
-    def openLocal(self, dude):
-	os.system("xdg-open 'Drive'")
+    def doView(self, dude):
+	os.system("zenity --text-info --title=\"View history\" --filename=\"$HOME/.config/indicator-drive/history.log\" --width 680 --height 580 &")
 
-    def setDarkTheme(self, dude):
-	os.system("cp -f '/usr/local/indicator-drive/drive-light.svg' '/usr/local/indicator-drive/drive.svg' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
+    def Info(self, dude):
+	os.system("zenity --info --title=\"Drive info\" --text=\"`cd $HOME/Drive && drive quota`\" &")
 
-    def setLightTheme(self, dude):
-	os.system("cp -f '/usr/local/indicator-drive/drive-dark.svg' '/usr/local/indicator-drive/drive.svg' && '/usr/local/indicator-drive/indicator-drive.sh indicator-restart'")
+    def setInterval(self, dude):
+	os.system("/usr/local/indicator-drive/indicator-drive.sh set_interval &")
+
+    def setIcon(self, dude):
+	os.system("/usr/local/indicator-drive/indicator-drive.sh change_icon &")
 
     def Quit(self, dude):
 	os.system("/usr/local/indicator-drive/indicator-drive.sh quit")
