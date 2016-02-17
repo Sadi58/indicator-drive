@@ -13,7 +13,7 @@ This indicator is based on https://github.com/Sadi58/grive-indicator which used 
 Installation
 ----------------------
 
-1. Install **drive**, **python-appindicator**, **zenity**, **inotifywait** and **indicator_drive** (e.g. using the `install-drive` and then `install-indicator-drive` scripts below), AND
+1. Install **drive**, **python-appindicator**, **zenity**, **inotifywait** and **indicator_drive** (e.g. using the `install-drive` and then `install-indicator-drive` scripts provided), AND
 
 2. If using the **drive** client for the first time, have it authenticated by creating your local Google Drive directory (e.g. `~/Drive`) and then entering the terminal command `drive init ~/Drive` and following the instructions (i.e. click the url link, choose your Google account, copy and paste the code provided).
 
