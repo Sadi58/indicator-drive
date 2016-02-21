@@ -4,13 +4,14 @@ drive_monitor()
 {
 while inotifywait -qqr -e modify -e move -e create -e delete "$HOME/Drive/"
 do
-	notify-send "Drive Indicator" "Updating Drive website..." -i gtk-dialog-info &
 	"/usr/local/indicator-drive/indicator-drive.sh" drive_push
 done
 }
 
 drive_push()
 {
+while ! wget -q -O /dev/null --no-cache http://www.google.com/; do sleep 10; done
+notify-send "Drive Indicator" "Updating Drive website..." -i gtk-dialog-info &
 if [[ ! -d "$HOME/.config/indicator-drive/" ]]
 then
 	mkdir "$HOME/.config/indicator-drive/"
@@ -35,15 +36,6 @@ echo "`date +'%Y-%m-%d %H:%M'` ▼ Change(s) in Drive website" >> "$HOME/.config
 echo "—————————————————————" >> "$HOME/.config/indicator-drive/history.log"
 cat "$HOME/.config/indicator-drive/remote.log" | sed -e "s/^File: //g" | grep "^/" | sed -e "s/$/ ► OVERWRITTEN on REMOTE/g" -e "s/ only on remote ► OVERWRITTEN on REMOTE/ ► DELETED on REMOTE/g" -e "s/ only on local ► OVERWRITTEN on REMOTE/ ► COPIED to REMOTE/g" -e "s/^\//☑ /g" >> "$HOME/.config/indicator-drive/history.log"
 echo "════════════════════════════════════════════════════════════════════════════════" >> "$HOME/.config/indicator-drive/history.log"
-sed -i -n '
-1h
-1!H
-$ {
-        g
-        s/^[0-9].*\s▼ Change.*\sin\sDrive\s.*\n—*\n═*//g
-        p
-}
-' "$HOME/.config/indicator-drive/history.log"
 Lines="$(wc -l "$HOME/.config/indicator-drive/history.log" | awk '{print $1}')"
 if [[ "$Lines" -gt 100 ]]
 then
@@ -59,6 +51,7 @@ drive_pull()
 {
 while true
 do
+	while ! wget -q -O /dev/null --no-cache http://www.google.com/; do sleep 10; done
 	if [[ ! -d "$HOME/.config/indicator-drive/" ]]
 	then
 		mkdir "$HOME/.config/indicator-drive/"
@@ -81,23 +74,14 @@ do
 	kill -9 `ps -e -o pid,cmd | egrep -v grep | grep "inotifywait" | grep "Drive" | awk '{print$1}'`
 	drive diff -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/local.log"
 	drive pull -no-prompt -ignore-name-clashes -ignore-conflict -ignore-checksum &>> "$HOME/.config/indicator-drive/local.log"
-	Changes="$(grep "Everything is up\-to\-date" "$HOME/.config/indicator-drive/local.log")"
-	if [[ -z "$Changes" ]]
+	Changes="$(grep " only on " "$HOME/.config/indicator-drive/local.log")"
+	if [[ ! -z "$Changes" ]]
 	then
 		notify-send "Drive Indicator" "Change(s) made in Drive folder!" -i gtk-dialog-info &
 		echo "`date +'%Y-%m-%d %H:%M'` ▼ Change(s) in Drive folder" >> "$HOME/.config/indicator-drive/history.log"
 		echo "—————————————————————" >> "$HOME/.config/indicator-drive/history.log"
 		cat "$HOME/.config/indicator-drive/local.log" | sed -e "s/^File: //g" | grep "^/" | sed -e "s/$/ ► OVERWRITTEN on LOCAL/g" -e "s/ only on remote ► OVERWRITTEN on LOCAL/ ► COPIED to LOCAL/g" -e "s/ only on local ► OVERWRITTEN on LOCAL/ ► DELETED on LOCAL/g" -e "s/^\//☑ /g" >> "$HOME/.config/indicator-drive/history.log"
 		echo "════════════════════════════════════════════════════════════════════════════════" >> "$HOME/.config/indicator-drive/history.log"
-		sed -i -n '
-1h
-1!H
-$ {
-        g
-        s/^[0-9].*\s▼ Change.*\sin\sDrive\s.*\n—*\n═*//g
-        p
-}
-' "$HOME/.config/indicator-drive/history.log"
 		Lines="$(wc -l "$HOME/.config/indicator-drive/history.log" | awk '{print $1}')"
 		if [[ "$Lines" -gt 100 ]]
 		then
