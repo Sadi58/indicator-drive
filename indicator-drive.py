@@ -78,7 +78,7 @@ class DriveIndicator:
 	self.menu.append(self.Quit_item)
 
     def infoDrive(self):
-	os.system("while ! ping -c 1 -W 1 8.8.8.8; do sleep 1; done && /usr/local/indicator-drive/indicator-drive.sh drive_pull && sleep 1m && /usr/local/indicator-drive/indicator-drive.sh drive_monitor &")
+	os.system("/usr/local/indicator-drive/indicator-drive.sh drive_pull && /usr/local/indicator-drive/indicator-drive.sh drive_monitor &")
 	stat, out = commands.getstatusoutput("/usr/local/indicator-drive/indicator-drive.sh sync_status")
 	return out
 

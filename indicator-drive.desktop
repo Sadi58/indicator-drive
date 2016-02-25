@@ -8,7 +8,6 @@ Comment=Simple indicator to synchronize Google Drive contents
 Icon=google-drive
 Hidden=false
 NoDisplay=false
-OnlyShowIn=Unity;GNOME;
 Terminal=false
 StartupNotify=true
 X-GNOME-Autostart-enabled=true

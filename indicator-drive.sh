@@ -28,9 +28,11 @@ if [[ ! -f "$HOME/.config/indicator-drive/sync-interval" ]]
 then
 	echo "5m" >	"$HOME/.config/indicator-drive/sync-interval"
 fi
+interval="$(cat "$HOME/.config/indicator-drive/sync-interval")"
+pkill -f "sleep $interval"
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_pull"
 cd "$HOME/Drive"
-drive diff -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/remote.log"
+drive diff -skip-content-check -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/remote.log"
 drive push -no-prompt -ignore-name-clashes -ignore-conflict -ignore-checksum
 echo "`date +'%Y-%m-%d %H:%M'` ▼ Change(s) in Drive website" >> "$HOME/.config/indicator-drive/history.log"
 echo "—————————————————————" >> "$HOME/.config/indicator-drive/history.log"
@@ -42,7 +44,6 @@ then
 	n="$(expr "$Lines" - 100)"
 	sed -ie "1,${n}d" "$HOME/.config/indicator-drive/history.log"
 fi
-interval="$(cat "$HOME/.config/indicator-drive/sync-interval")"
 sleep "$interval"
 "/usr/local/indicator-drive/indicator-drive.sh" drive_pull &
 }
@@ -68,11 +69,13 @@ do
 	then
 		echo "5m" >	"$HOME/.config/indicator-drive/sync-interval"
 	fi
-	cd "$HOME/Drive"
-	pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_monitor"
+	interval="$(cat "$HOME/.config/indicator-drive/sync-interval")"
+	pkill -f "sleep $interval"
 	pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_push"
+	pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_monitor"
 	kill -9 `ps -e -o pid,cmd | egrep -v grep | grep "inotifywait" | grep "Drive" | awk '{print$1}'`
-	drive diff -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/local.log"
+	cd "$HOME/Drive"
+	drive diff -skip-content-check -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/local.log"
 	drive pull -no-prompt -ignore-name-clashes -ignore-conflict -ignore-checksum &>> "$HOME/.config/indicator-drive/local.log"
 	Changes="$(grep " only on " "$HOME/.config/indicator-drive/local.log")"
 	if [[ ! -z "$Changes" ]]
@@ -90,7 +93,6 @@ do
 		fi
 	fi
 	"/usr/local/indicator-drive/indicator-drive.sh" drive_monitor &
-	interval="$(cat "$HOME/.config/indicator-drive/sync-interval")"
 	sleep "$interval"
 done
 }
@@ -206,8 +208,8 @@ option
 
 quit()
 {
-InterVal="$(cat "$HOME/.config/indicator-drive/sync-interval" | sed -e "s/m//g" -e "s/ //g")"
-pkill -f "sleep $InterVal"
+interval="$(cat "$HOME/.config/indicator-drive/sync-interval")"
+pkill -f "sleep $interval"
 pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_pull"
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive_monitor"

@@ -1,9 +1,35 @@
 #!/bin/bash
 
-for i in `ps -e -o pid,cmd | egrep -v grep | grep "inotifywait" | grep "Drive" | awk '{print$1}'`
-do
-	kill -9 $i
-done
+# install and configure grive client first
+
+REPO=$(which drive | grep -c "bin/drive")
+
+if [ "$REPO" = "0" ]
+then
+	sudo add-apt-repository ppa:twodopeshaggy/drive -y
+	sudo apt-get update
+	sudo apt-get install drive
+else
+	echo "drive client is already installed."
+fi
+
+if ! [[ -d "$HOME/Drive" ]]
+then
+    mkdir -p "$HOME/Drive"
+else
+	echo "drive folder already exists."
+fi
+
+if ! [[ -d "$HOME/Drive/.gd" ]]
+then
+    drive init "$HOME/Drive"
+else
+	echo "drive client is already configured."
+fi
+
+# install / upgrade drive indicator
+
+kill -9 `ps -e -o pid,cmd | egrep -v grep | grep "inotifywait" | grep "Drive" | awk '{print$1}'`
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-pull"
 pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-monitor"
 pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
@@ -12,16 +38,22 @@ DEPENDENCY1=$(apt-cache search python-appindicator | grep "python-appindicator -
 if [ "$DEPENDENCY1" = "python-appindicator" ]
 then
 	sudo apt-get install python-appindicator
+else
+	echo "python-appindicator is already installed."
 fi
 DEPENDENCY2=$(which zenity | grep -c "bin/zenity")
 if [ "$DEPENDENCY2" = "0" ]
 then
 	sudo apt-get install zenity
+else
+	echo "zenity is already installed."
 fi
 DEPENDENCY3=$(which inotifywait | grep -c "bin/inotifywait")
 if [ "$DEPENDENCY3" = "0" ]
 then
 	sudo apt-get install inotifywait
+else
+	echo "inotifywait is already installed."
 fi
 
 sudo rm -Rf "/usr/local/indicator-drive"
@@ -48,7 +80,8 @@ sudo cp -f drive-light.svg /usr/local/indicator-drive/
 sudo chown root:root /usr/local/indicator-drive/drive-light.svg
 sudo chmod a+r /usr/local/indicator-drive/drive-light.svg
 
+sudo cp -f indicator-drive.desktop /usr/share/applications/
 sudo cp -f indicator-drive.desktop /etc/xdg/autostart/
-sudo cp -f indicator_drive.desktop /usr/share/applications/
+sudo chmod a+x /etc/xdg/autostart/indicator-drive.desktop
 
-echo "Installation completed. Now indicator-drive is ready to start at every login. But make sure that drive is setup and configured before that."
+echo "Installation/Upgrade completed. Now Drive Indicator is ready to start at every login."
