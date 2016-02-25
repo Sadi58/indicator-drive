@@ -77,8 +77,8 @@ do
 	cd "$HOME/Drive"
 	drive diff -skip-content-check -ignore-name-clashes -ignore-conflict -ignore-checksum &> "$HOME/.config/indicator-drive/local.log"
 	drive pull -no-prompt -ignore-name-clashes -ignore-conflict -ignore-checksum &>> "$HOME/.config/indicator-drive/local.log"
-	Changes="$(grep " only on " "$HOME/.config/indicator-drive/local.log")"
-	if [[ ! -z "$Changes" ]]
+	Changes="$(grep "Everything is up-to-date" "$HOME/.config/indicator-drive/local.log")"
+	if [[ -z "$Changes" ]]
 	then
 		notify-send "Drive Indicator" "Change(s) made in Drive folder!" -i gtk-dialog-info &
 		echo "`date +'%Y-%m-%d %H:%M'` ▼ Change(s) in Drive folder" >> "$HOME/.config/indicator-drive/history.log"
