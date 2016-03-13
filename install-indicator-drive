@@ -30,9 +30,9 @@ fi
 # install / upgrade drive indicator
 
 kill -9 `ps -e -o pid,cmd | egrep -v grep | grep "inotifywait" | grep "Drive" | awk '{print$1}'`
-pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-pull"
-pkill -f "/bin/bash /usr/local/indicator-drive/indicator-drive.sh drive-monitor"
-pkill -f "python /usr/local/indicator-drive/indicator-drive.py"
+pkill -f "/bin/bash /usr/share/indicator-drive/indicator-drive.sh drive-pull"
+pkill -f "/bin/bash /usr/share/indicator-drive/indicator-drive.sh drive-monitor"
+pkill -f "python /usr/share/indicator-drive/indicator-drive.py"
 
 DEPENDENCY1=$(apt-cache search python-appindicator | grep "python-appindicator - " | awk -F " - " '{print $1}')
 if [ "$DEPENDENCY1" = "python-appindicator" ]
@@ -56,29 +56,29 @@ else
 	echo "inotifywait is already installed."
 fi
 
-sudo rm -Rf "/usr/local/indicator-drive"
-sudo mkdir -p "/usr/local/indicator-drive"
+sudo rm -Rf "/usr/share/indicator-drive"
+sudo mkdir -p "/usr/share/indicator-drive"
 	
-sudo cp -f indicator-drive.py /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/indicator-drive.py
-sudo chmod 755 /usr/local/indicator-drive/indicator-drive.py
+sudo cp -f indicator-drive.py /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/indicator-drive.py
+sudo chmod 755 /usr/share/indicator-drive/indicator-drive.py
 
-sudo cp -f indicator-drive.sh /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/indicator-drive.sh
-sudo chmod 755 /usr/local/indicator-drive/indicator-drive.sh
+sudo cp -f indicator-drive.sh /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/indicator-drive.sh
+sudo chmod 755 /usr/share/indicator-drive/indicator-drive.sh
 
-sudo cp -f drive.svg /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/drive.svg
-sudo chmod a+rw /usr/local/indicator-drive/drive.svg
-sudo cp -f drive-color.svg /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/drive-color.svg
-sudo chmod a+r /usr/local/indicator-drive/drive-color.svg
-sudo cp -f drive-dark.svg /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/drive-dark.svg
-sudo chmod a+r /usr/local/indicator-drive/drive-dark.svg
-sudo cp -f drive-light.svg /usr/local/indicator-drive/
-sudo chown root:root /usr/local/indicator-drive/drive-light.svg
-sudo chmod a+r /usr/local/indicator-drive/drive-light.svg
+sudo cp -f drive.svg /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/drive.svg
+sudo chmod a+rw /usr/share/indicator-drive/drive.svg
+sudo cp -f drive-color.svg /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/drive-color.svg
+sudo chmod a+r /usr/share/indicator-drive/drive-color.svg
+sudo cp -f drive-dark.svg /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/drive-dark.svg
+sudo chmod a+r /usr/share/indicator-drive/drive-dark.svg
+sudo cp -f drive-light.svg /usr/share/indicator-drive/
+sudo chown root:root /usr/share/indicator-drive/drive-light.svg
+sudo chmod a+r /usr/share/indicator-drive/drive-light.svg
 
 sudo cp -f indicator-drive.desktop /usr/share/applications/
 sudo cp -f indicator-drive.desktop /etc/xdg/autostart/

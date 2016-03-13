@@ -13,7 +13,7 @@ class DriveIndicator:
                                            appindicator.CATEGORY_APPLICATION_STATUS)
 	self.ind.set_status(appindicator.STATUS_ACTIVE)
 	self.ind.set_attention_icon("indicator-messages-new")
-	self.ind.set_icon_theme_path("/usr/local/indicator-drive/")
+	self.ind.set_icon_theme_path("/usr/share/indicator-drive/")
 	self.ind.set_icon('drive')
         self.menu_setup()
         self.ind.set_menu(self.menu)
@@ -42,16 +42,16 @@ class DriveIndicator:
 	self.separator2_item = gtk.SeparatorMenuItem()
 	self.separator2_item.show()
 
-	self.Info_item = gtk.MenuItem("Account Info")
+	self.Info_item = gtk.MenuItem("Account info")
         self.Info_item.connect("activate", self.Info)
         self.Info_item.show()
 
 	self.separator3_item = gtk.SeparatorMenuItem()
 	self.separator3_item.show()
 
-	self.setInterval_item = gtk.MenuItem("Change sync interval...")
-        self.setInterval_item.connect("activate", self.setInterval)
-        self.setInterval_item.show()
+	self.Interval_item = gtk.MenuItem("Change sync interval...")
+        self.Interval_item.connect("activate", self.setInterval)
+        self.Interval_item.show()
 
 	self.Icon_item = gtk.MenuItem("Change indicator icon...")
         self.Icon_item.connect("activate", self.setIcon)
@@ -72,14 +72,14 @@ class DriveIndicator:
 	self.menu.append(self.separator2_item)
 	self.menu.append(self.Info_item)
 	self.menu.append(self.separator3_item)
-	self.menu.append(self.setInterval_item)
+	self.menu.append(self.Interval_item)
 	self.menu.append(self.Icon_item)
 	self.menu.append(self.separator4_item)
 	self.menu.append(self.Quit_item)
 
     def infoDrive(self):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh drive_pull && /usr/local/indicator-drive/indicator-drive.sh drive_monitor &")
-	stat, out = commands.getstatusoutput("/usr/local/indicator-drive/indicator-drive.sh sync_status")
+	os.system("/usr/share/indicator-drive/indicator-drive.sh drive_pull &")
+	stat, out = commands.getstatusoutput("/usr/share/indicator-drive/indicator-drive.sh sync_status")
 	return out
 
     def openLocal(self, dude):
@@ -95,13 +95,13 @@ class DriveIndicator:
 	os.system("zenity --info --title=\"Drive info\" --text=\"`cd $HOME/Drive && drive quota`\" &")
 
     def setInterval(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh set_interval &")
+	os.system("/usr/share/indicator-drive/indicator-drive.sh set_interval &")
 
     def setIcon(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh change_icon &")
+	os.system("/usr/share/indicator-drive/indicator-drive.sh change_icon &")
 
     def Quit(self, dude):
-	os.system("/usr/local/indicator-drive/indicator-drive.sh quit")
+	os.system("/usr/share/indicator-drive/indicator-drive.sh quit")
 
     def ignore(*args):
 	return gtk.TRUE
