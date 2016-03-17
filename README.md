@@ -26,10 +26,10 @@ Change Log
 - **0.91b:** Upgraded to version 0.91b with minor fixes
 - **0.90b:** Moved from Alpha to Beta stage
 
-Project Abandonment Notice and Invitation for Adopters or Collaborators
+Project Suspension Notice (and Invitation for Adopters or Collaborators)
 ----------------------
 
-**This work has been abandoned in favor of what looks like a better alternative:**
+**This work has been suspended in favor of what looks like a better alternative:**
 
 **https://www.thefanclub.co.za/overgrive**
 
