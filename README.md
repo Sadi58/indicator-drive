@@ -26,7 +26,7 @@ Change Log
 - **0.91b:** Upgraded to version 0.91b with minor fixes
 - **0.90b:** Moved from Alpha to Beta stage
 
-Project Suspension Notice (and Invitation for Adopters or Collaborators)
+Suspension Notice (& Invitation for Adopters/Collaborators)
 ----------------------
 
 **This work has been suspended in favor of what looks like a better alternative:**
