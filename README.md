@@ -1,3 +1,13 @@
+
+Suspension Notice (& Invitation for Adopters/Collaborators)
+----------------------
+
+**This work has been suspended in favor of what looks like a better alternative:**
+
+**https://www.thefanclub.co.za/overgrive**
+
+I personally think it's worth giving $4.99 for this valuable work :-)
+
 Drive Indicator
 ===============
 
@@ -25,13 +35,3 @@ Change Log
 - **0.92b:** Moved from "/usr/local/" to "/usr/share/" with some fixes and enhancements
 - **0.91b:** Upgraded to version 0.91b with minor fixes
 - **0.90b:** Moved from Alpha to Beta stage
-
-Suspension Notice (& Invitation for Adopters/Collaborators)
-----------------------
-
-**This work has been suspended in favor of what looks like a better alternative:**
-
-**https://www.thefanclub.co.za/overgrive**
-
-I personally think it's worth giving $4.99 for this valuable work :-)
-
