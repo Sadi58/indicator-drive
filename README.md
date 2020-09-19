@@ -1,12 +1,8 @@
 
-Suspension Notice (& Invitation for Adopters/Collaborators)
+Suspension Notice
 ----------------------
 
-**This work has been suspended in favor of what looks like a better alternative:**
-
-**https://www.thefanclub.co.za/overgrive**
-
-I personally think it's worth giving $4.99 for this valuable work :-)
+**This work has been suspended in view of the onset of better alternatives**
 
 Drive Indicator
 ===============
